@@ -1,0 +1,72 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{Olausson2023}
+\citation{Pan2023}
+\citation{Li2025}
+\citation{Olausson2023,Min2023}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{Olausson2023}
+\citation{Pan2023}
+\citation{Li2025}
+\citation{Kazemi2022}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Neuro-Symbolic Reasoning Baselines}{2}{subsection.2.1}\protected@file@percent }
+\citation{Sinha2019}
+\citation{Clark2020}
+\citation{Tafjord2021}
+\citation{Han2022}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The RFDE pipeline: (1) Prolog meta-interpreter executes backward chaining on the query. (2) When SLD resolution encounters an undefined predicate (e.g., \texttt  {parent(Alice, Bob)}), the unknown-predicate hook fires. (3) The hook constructs a grounding query scoped to a single predicate and invokes the LLM. (4) The LLM responds with yes/no/unknown and confidence. (5) The meta-interpreter asserts the result into the KB and retries resolution. Proof traces are serialized as nested ProofNode structures. This demand-driven model contrasts with eager upfront FOL translation (LINC-style), where the entire document is parsed to FOL before reasoning begins.}}{3}{figure.1}\protected@file@percent }
+\newlabel{fig:rfde-architecture}{{1}{3}{The RFDE pipeline: (1) Prolog meta-interpreter executes backward chaining on the query. (2) When SLD resolution encounters an undefined predicate (e.g., \texttt {parent(Alice, Bob)}), the unknown-predicate hook fires. (3) The hook constructs a grounding query scoped to a single predicate and invokes the LLM. (4) The LLM responds with yes/no/unknown and confidence. (5) The meta-interpreter asserts the result into the KB and retries resolution. Proof traces are serialized as nested ProofNode structures. This demand-driven model contrasts with eager upfront FOL translation (LINC-style), where the entire document is parsed to FOL before reasoning begins}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Evaluation Frameworks and Hallucination Measurement}{3}{subsection.2.2}\protected@file@percent }
+\citation{Li2024,Huang2023}
+\citation{Min2023}
+\citation{Guo2017}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Lazy Evaluation and Demand-Driven Computation}{4}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{4}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}RFDE Architecture}{4}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Meta-Interpreter and Proof-Obligation Signaling}{4}{subsubsection.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Grounding Query and LLM Invocation}{4}{subsubsection.3.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Confidence Propagation}{5}{subsubsection.3.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Baseline Methods}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Experimental Setup}{5}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces End-to-end accuracy on 134 stratified examples from CLUTRR\_v1 (36 ex), RuleTaker (50 ex), and ProofWriter (48 ex). Overall: RFDE 51.5\%, CoT 57.5\%, LINC 48.5\%, RAG 39.6\%. McNemar test RFDE vs LINC: $p=0.50$ (not significant). RFDE excels on RuleTaker (72\%) but struggles on CLUTRR (11.1\%), suggesting task-specific advantages. Per-dataset breakdown shows high variance by dataset and method, indicating that architectural differences do not uniformly predict outcomes.}}{6}{figure.2}\protected@file@percent }
+\newlabel{fig:accuracy}{{2}{6}{End-to-end accuracy on 134 stratified examples from CLUTRR\_v1 (36 ex), RuleTaker (50 ex), and ProofWriter (48 ex). Overall: RFDE 51.5\%, CoT 57.5\%, LINC 48.5\%, RAG 39.6\%. McNemar test RFDE vs LINC: $p=0.50$ (not significant). RFDE excels on RuleTaker (72\%) but struggles on CLUTRR (11.1\%), suggesting task-specific advantages. Per-dataset breakdown shows high variance by dataset and method, indicating that architectural differences do not uniformly predict outcomes}{figure.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments and Results}{6}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Dataset and Benchmark Specifications\let \reserved@d =[\def \par }{6}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Accuracy Results}{6}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Predicate-level hallucination rates via independent verifier with separate LLM pass. RFDE: 75.0\% (92 of 123 asserted predicates flagged as unsupported by source span match). CoT/LINC/RAG: 0.0\%. RFDE's high rate is driven by decomposition granularity mismatch: RFDE asserts atomic predicates (\texttt  {father(alice, bob)}) which the verifier cannot match to natural language source spans (``Alice's father''). Stratified by task complexity: atomic-only 7.7\%, mixed 16.7\%, derived-required 20.0\%, showing hallucination increases with proof depth.}}{7}{figure.3}\protected@file@percent }
+\newlabel{fig:hallucination}{{3}{7}{Predicate-level hallucination rates via independent verifier with separate LLM pass. RFDE: 75.0\% (92 of 123 asserted predicates flagged as unsupported by source span match). CoT/LINC/RAG: 0.0\%. RFDE's high rate is driven by decomposition granularity mismatch: RFDE asserts atomic predicates (\texttt {father(alice, bob)}) which the verifier cannot match to natural language source spans (``Alice's father''). Stratified by task complexity: atomic-only 7.7\%, mixed 16.7\%, derived-required 20.0\%, showing hallucination increases with proof depth}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Hallucination Analysis: Independent Predicate Verification\let \reserved@d =[\def \par }{7}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Per-Class Accuracy Breakdown}{8}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Statistical Significance and Effect Sizes}{8}{subsection.4.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces McNemar's test results for pairwise accuracy comparisons.}}{8}{table.1}\protected@file@percent }
+\newlabel{tab:mcnemar}{{1}{8}{McNemar's test results for pairwise accuracy comparisons}{table.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces McNemar's test results (binomial exact, two-sided, $\alpha =0.05$) for pairwise accuracy comparisons. RFDE vs LINC: $p=0.50$ (not significant, $n_{10}=4$, $n_{01}=8$). RFDE vs CoT: $p=0.12$ (not significant, $n_{10}=6$, $n_{01}=14$). RFDE vs RAG: $p=0.0001$ (significant, $n_{10}=14$, $n_{01}=0$). Only RFDE vs RAG reaches statistical significance. Small discordant pair counts (4--14) indicate limited power to detect differences; the lack of significance vs LINC/CoT contradicts claims of architectural advantage.}}{9}{figure.4}\protected@file@percent }
+\newlabel{fig:mcnemar}{{4}{9}{McNemar's test results (binomial exact, two-sided, $\alpha =0.05$) for pairwise accuracy comparisons. RFDE vs LINC: $p=0.50$ (not significant, $n_{10}=4$, $n_{01}=8$). RFDE vs CoT: $p=0.12$ (not significant, $n_{10}=6$, $n_{01}=14$). RFDE vs RAG: $p=0.0001$ (significant, $n_{10}=14$, $n_{01}=0$). Only RFDE vs RAG reaches statistical significance. Small discordant pair counts (4--14) indicate limited power to detect differences; the lack of significance vs LINC/CoT contradicts claims of architectural advantage}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Confidence Calibration and ECE}{9}{subsection.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Inference Latency}{9}{subsection.4.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Cost}{9}{subsection.4.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{10}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}The Central Finding: Decomposition Granularity vs Verifiability}{10}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Why Demand-Driven Extraction Did Not Eliminate Hallucination}{10}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Honest Scoping: What RFDE Actually Contributes}{10}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Comparison to Related Work}{11}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Limitations}{11}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{11}{section.7}\protected@file@percent }
+\bibstyle{plainnat}
+\bibdata{references}
+\bibcite{Clark2020}{{1}{2020}{{Clark et~al.}}{{Clark, Tafjord, and Richardson}}}
+\bibcite{Guo2017}{{2}{2017}{{Guo et~al.}}{{Guo, Pleiss, Sun, and Weinberger}}}
+\bibcite{Han2022}{{3}{2022}{{Han et~al.}}{{Han, Schoelkopf, Zhao, Qi, Riddell, Benson, Sun, and Radev}}}
+\bibcite{Huang2023}{{4}{2023}{{Huang et~al.}}{{Huang, Yu, Ma, Zhong, Feng, Wang, Chen, Peng, Feng, Qin, and Liu}}}
+\bibcite{Kazemi2022}{{5}{2023}{{Kazemi et~al.}}{{Kazemi, Kim, Bhatia, Xu, and Ramachandran}}}
+\bibcite{Li2024}{{6}{2024}{{Li et~al.}}{{Li, Li, and Wang}}}
+\bibcite{Li2025}{{7}{2025}{{Li et~al.}}{{Li, Cheng, Liu, Wang, Zeng, and Liu}}}
+\bibcite{Min2023}{{8}{2023}{{Min et~al.}}{{Min, Krishna, Lyu, Lewis, tau Yih, Koh, Iyyer, Zettlemoyer, and Hajishirzi}}}
+\bibcite{Olausson2023}{{9}{2023}{{Olausson et~al.}}{{Olausson, Gu, Lipkin, Zhang, Solar-Lezama, Tenenbaum, and Levy}}}
+\bibcite{Pan2023}{{10}{2023}{{Pan et~al.}}{{Pan, Albalak, Wang, and Wang}}}
+\bibcite{Sinha2019}{{11}{2019}{{Sinha et~al.}}{{Sinha, Sodhani, Dong, Pineau, and Hamilton}}}
+\bibcite{Tafjord2021}{{12}{2021}{{Tafjord et~al.}}{{Tafjord, Dalvi, and Clark}}}
+\gdef \@abspage@last{13}

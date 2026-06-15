@@ -1,0 +1,108 @@
+\begin{thebibliography}{12}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Clark et~al.(2020)Clark, Tafjord, and Richardson]{Clark2020}
+Peter Clark, Oyvind Tafjord, and Kyle Richardson.
+\newblock Transformers as soft reasoners over language.
+\newblock In \emph{International Joint Conference on Artificial Intelligence},
+  pages 3882--3890, 2020.
+\newblock \doi{10.24963/ijcai.2020/537}.
+
+\bibitem[Guo et~al.(2017)Guo, Pleiss, Sun, and Weinberger]{Guo2017}
+Chuan Guo, Geoff Pleiss, Yu~Sun, and Kilian~Q. Weinberger.
+\newblock On calibration of modern neural networks.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  1321--1330, 2017.
+
+\bibitem[Han et~al.(2022)Han, Schoelkopf, Zhao, Qi, Riddell, Benson, Sun, and
+  Radev]{Han2022}
+Simeng Han, Hailey Schoelkopf, Yilun Zhao, Zhenting Qi, Martin Riddell, Luke
+  Benson, Lucy Sun, and Dragomir~R. Radev.
+\newblock Folio: Natural language reasoning with first-order logic.
+\newblock In \emph{Conference on Empirical Methods in Natural Language
+  Processing}, 2022.
+\newblock \doi{10.48550/arXiv.2209.00840}.
+
+\bibitem[Huang et~al.(2023)Huang, Yu, Ma, Zhong, Feng, Wang, Chen, Peng, Feng,
+  Qin, and Liu]{Huang2023}
+Lei Huang, Weijiang Yu, Weitao Ma, Weihong Zhong, Zhangyin Feng, Haotian Wang,
+  Qianglong Chen, Weihua Peng, Xiaocheng Feng, Bing Qin, and Ting Liu.
+\newblock A survey on hallucination in large language models: Principles,
+  taxonomy, challenges, and open questions.
+\newblock \emph{ACM Transactions on Information Systems}, 43:\penalty0 1--55,
+  2023.
+\newblock \doi{10.1145/3703155}.
+
+\bibitem[Kazemi et~al.(2023)Kazemi, Kim, Bhatia, Xu, and
+  Ramachandran]{Kazemi2022}
+Seyed~Mehran Kazemi, Najoung Kim, Deepti Bhatia, Xinyuan Xu, and Deepak
+  Ramachandran.
+\newblock Lambada: Backward chaining for automated reasoning in natural
+  language.
+\newblock In \emph{Annual Meeting of the Association for Computational
+  Linguistics}, 2023.
+\newblock \doi{10.48550/arXiv.2212.13894}.
+
+\bibitem[Li et~al.(2024)Li, Li, and Wang]{Li2024}
+Lianda Li, Yunshui Li, and Shuai Wang.
+\newblock A comprehensive survey of hallucination in large language models.
+\newblock \emph{ArXiv}, 2024.
+
+\bibitem[Li et~al.(2025)Li, Cheng, Liu, Wang, Zeng, and Liu]{Li2025}
+Qingchuan Li, Mingyue Cheng, Zirui Liu, Daoyu Wang, Yuting Zeng, and Tongxuan
+  Liu.
+\newblock From hypothesis to premises: Llm-based backward logical reasoning
+  with selective symbolic translation.
+\newblock In \emph{AAAI Conference on Artificial Intelligence}, 2025.
+\newblock \doi{10.48550/arXiv.2512.03360}.
+
+\bibitem[Min et~al.(2023)Min, Krishna, Lyu, Lewis, tau Yih, Koh, Iyyer,
+  Zettlemoyer, and Hajishirzi]{Min2023}
+Sewon Min, Kalpesh Krishna, Xinxi Lyu, Mike Lewis, Wen tau Yih, Pang~Wei Koh,
+  Mohit Iyyer, Luke Zettlemoyer, and Hannaneh Hajishirzi.
+\newblock Factscore: Fine-grained atomic evaluation of factual precision in
+  long form text generation.
+\newblock In \emph{Conference on Empirical Methods in Natural Language
+  Processing}, 2023.
+\newblock \doi{10.48550/arXiv.2305.14251}.
+
+\bibitem[Olausson et~al.(2023)Olausson, Gu, Lipkin, Zhang, Solar-Lezama,
+  Tenenbaum, and Levy]{Olausson2023}
+Theo~X. Olausson, Alex Gu, Benjamin Lipkin, Cedegao~E. Zhang, Armando
+  Solar-Lezama, Josh Tenenbaum, and Roger Levy.
+\newblock Linc: A neurosymbolic approach for logical reasoning by combining
+  language models with first-order logic provers.
+\newblock In \emph{Conference on Empirical Methods in Natural Language
+  Processing}, pages 5153--5176, 2023.
+\newblock \doi{10.18653/v1/2023.emnlp-main.313}.
+
+\bibitem[Pan et~al.(2023)Pan, Albalak, Wang, and Wang]{Pan2023}
+Liangming Pan, Alon Albalak, Xinyi Wang, and William~Yang Wang.
+\newblock Logic-lm: Empowering large language models with symbolic solvers for
+  faithful logical reasoning.
+\newblock In \emph{Findings of the Conference on Empirical Methods in Natural
+  Language Processing}, 2023.
+\newblock \doi{10.48550/arXiv.2305.12295}.
+
+\bibitem[Sinha et~al.(2019)Sinha, Sodhani, Dong, Pineau, and
+  Hamilton]{Sinha2019}
+Koustuv Sinha, Shagun Sodhani, Jin Dong, Joelle Pineau, and William~L.
+  Hamilton.
+\newblock Clutrr: A diagnostic benchmark for inductive reasoning from text.
+\newblock In \emph{Conference on Empirical Methods in Natural Language
+  Processing}, pages 4505--4514, 2019.
+\newblock \doi{10.18653/v1/D19-1458}.
+
+\bibitem[Tafjord et~al.(2021)Tafjord, Dalvi, and Clark]{Tafjord2021}
+Oyvind Tafjord, Bhavana Dalvi, and Peter Clark.
+\newblock Proofwriter: Generating implications, proofs, and abductive
+  statements over natural language.
+\newblock In \emph{Findings of the Annual Meeting of the Association for
+  Computational Linguistics}, pages 3621--3634, 2021.
+\newblock \doi{10.18653/v1/2021.findings-acl.317}.
+
+\end{thebibliography}

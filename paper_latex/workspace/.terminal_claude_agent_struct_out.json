@@ -1,0 +1,15 @@
+{
+  "title": "RFDE: Demand-Driven Fact Extraction for Neuro-Symbolic Reasoning",
+  "summary": "Generated a 13-page publication-ready LaTeX paper titled 'Demand-Driven Fact Extraction for Neuro-Symbolic Reasoning: A Decomposition Granularity Perspective'. The paper includes all required sections: Abstract, Introduction (with contribution scope), Related Work (neuro-symbolic baselines, evaluation frameworks, lazy evaluation), Methods (RFDE architecture with meta-interpreter, grounding oracle, confidence propagation; baselines; experimental setup), Experiments and Results (dataset specs, accuracy results, hallucination analysis, per-class breakdown, McNemar significance table, ECE, latency, cost), Discussion (decomposition granularity vs verifiability, why hallucination persists, honest scoping, comparison to related work), Limitations (6 items), and Conclusion. All 4 figures were included: fig1 (RFDE architecture, figure* full-width), fig2 (accuracy comparison bar chart, figure*), fig3 (hallucination rates, figure*), fig4 (McNemar significance, figure*). BibTeX was fetched for all 12 references via Semantic Scholar (aii_semscholar_bib__fetch) with no fabricated entries. Compilation ran the full 4-pass sequence (pdflatex, bibtex, pdflatex, pdflatex). All citations resolved (no ?? warnings). Visual review of all 13 pages confirmed clean layout, no overlapping figures, no cut-off text, proper spacing. PDF is 5.1MB.",
+  "out_expected_files": {
+    "paper_tex_path": "paper.tex",
+    "paper_pdf_path": "paper.pdf",
+    "references_bib_path": "references.bib",
+    "figure_paths": [
+      "figures/fig1_v0.jpg",
+      "figures/fig2_v0.jpg",
+      "figures/fig3_v0.jpg",
+      "figures/fig4_v0.jpg"
+    ]
+  }
+}
