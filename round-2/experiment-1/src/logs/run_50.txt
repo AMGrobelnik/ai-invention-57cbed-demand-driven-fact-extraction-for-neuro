@@ -1,0 +1,27 @@
+17:32:50|INFO   |Detected 6 CPUs
+17:32:50|INFO   |RFDE experiment | model=anthropic/claude-haiku-4-5 | n_per_ds=50 | budget=$9.0
+17:32:50|INFO   |Loading datasets | n_per_ds=50
+17:32:50|INFO   |Loading full_data_out_1.json (43528KB)
+17:32:50|INFO   |Loading full_data_out_2.json (95443KB)
+17:32:51|INFO   |Loading full_data_out_3.json (88162KB)
+17:32:51|INFO   |Loading full_data_out_4.json (98690KB)
+17:32:52|INFO   |Loading full_data_out_5.json (10943KB)
+17:32:52|INFO   |  CLUTRR_v1: 53518 examples loaded
+17:32:52|INFO   |  RuleTaker: 237906 examples loaded
+17:32:52|INFO   |  ProofWriter: 131563 examples loaded
+17:32:52|INFO   |  CLUTRR_v1: 36 sampled | labels: {'mother': 2, 'grandmother': 2, 'grandfather': 2, 'daughter': 2, 'grandson': 2, 'daughter-in-law': 2, 'niece': 2, 'granddaughter': 2, 'son': 2, 'father-in-law': 2, 'father': 2, 'uncle': 2, 'brother': 2, 'sister': 2, 'mother-in-law': 2, 'son-in-law': 2, 'aunt': 2, 'nephew': 2}
+17:32:53|INFO   |  RuleTaker: 50 sampled | labels: {'not entailment': 25, 'entailment': 25}
+17:32:53|INFO   |  ProofWriter: 48 sampled | labels: {'True': 16, 'False': 16, 'Unknown': 16}
+17:32:53|INFO   |Total tasks: 134
+17:32:53|INFO   |=== Method: cot | cost=$0.000 ===
+17:33:56|INFO   |  cot done | cost=$0.159
+17:33:56|INFO   |=== Method: rag | cost=$0.159 ===
+17:34:48|INFO   |  rag done | cost=$0.252
+17:34:48|INFO   |=== Method: linc | cost=$0.252 ===
+17:36:15|INFO   |  linc done | cost=$0.466
+17:36:15|INFO   |=== Method: rfde | cost=$0.466 ===
+17:43:48|INFO   |  rfde done | cost=$1.139
+17:43:48|INFO   |Running hallucination verification on sample predicates...
+17:43:57|INFO   |Hallucination rates: {'cot': 0.0, 'rag': 0.0, 'linc': 0.0, 'rfde': 0.75}
+17:43:57|INFO   |Saved → /home/adrian/projects/ai-inventor/aii_data/users/admin/runs/run_vlVwS0MntEIr/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/method_out.json | total_cost=$1.1420
+17:43:57|INFO   |LLM call log → /home/adrian/projects/ai-inventor/aii_data/users/admin/runs/run_vlVwS0MntEIr/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/llm_calls.jsonl (2017 entries)

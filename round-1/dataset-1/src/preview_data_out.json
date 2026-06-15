@@ -1,0 +1,100 @@
+{
+  "datasets": [
+    {
+      "dataset": "CLUTRR_v1",
+      "examples": [
+        {
+          "input": "Story: [Ashley]'s daughter, [Lillian], asked her mom to read her a story. [Nicholas]'s sister [Lillian] asked him for some help planting her garden.\nQuery: What is the kinship relation between Ashley ...",
+          "output": "son",
+          "metadata_source_id": "0fc660c1-e7d5-41fb-8d72-d2beb2c8d2ef",
+          "metadata_hop_depth": 2,
+          "metadata_task_name": "task_1.2",
+          "metadata_relation_chain": "daughter-brother",
+          "metadata_proof_state": "[{('Ashley', 'son', 'Nicholas'): [('Ashley', 'daughter', 'Lillian'), ('Lillian', 'brother', 'Nicholas')]}]",
+          "metadata_task_type": "kinship_classification"
+        },
+        {
+          "input": "Story: [Nancy] likes to cut the hair of her daughter [Heidi]. [Heidi]'s sister [Lorraine] went to beauty school and taught them all how to cut hair expertly.\nQuery: What is the kinship relation betwee...",
+          "output": "daughter",
+          "metadata_source_id": "b1c985cf-69b5-4575-97d3-f5ee6807b315",
+          "metadata_hop_depth": 2,
+          "metadata_task_name": "task_1.2",
+          "metadata_relation_chain": "daughter-sister",
+          "metadata_proof_state": "[{('Nancy', 'daughter', 'Lorraine'): [('Nancy', 'daughter', 'Heidi'), ('Heidi', 'sister', 'Lorraine')]}]",
+          "metadata_task_type": "kinship_classification"
+        },
+        {
+          "input": "Story: [Dale] and his sister [Nancy] are decorating for a party. [Nancy]'s daughter [Louise] thinks the party will be fun.\nQuery: What is the kinship relation between Dale and Louise?",
+          "output": "niece",
+          "metadata_source_id": "5e7fc867-3782-4ff6-98d5-33394fac9a68",
+          "metadata_hop_depth": 2,
+          "metadata_task_name": "task_1.2",
+          "metadata_relation_chain": "sister-daughter",
+          "metadata_proof_state": "[{('Dale', 'niece', 'Louise'): [('Dale', 'sister', 'Nancy'), ('Nancy', 'daughter', 'Louise')]}]",
+          "metadata_task_type": "kinship_classification"
+        }
+      ]
+    },
+    {
+      "dataset": "RuleTaker",
+      "examples": [
+        {
+          "input": "Context: Anne is quiet. Anne is not young. Bob is kind. Bob is young. Dave is rough. Dave is round. Dave is smart. Dave is not young. Fiona is quiet. Fiona is not round. Kind, young things are not sma...",
+          "output": "entailment",
+          "metadata_config": "depth-1",
+          "metadata_hop_depth": 1,
+          "metadata_task_type": "logical_entailment"
+        },
+        {
+          "input": "Context: Anne is quiet. Anne is not young. Bob is kind. Bob is young. Dave is rough. Dave is round. Dave is smart. Dave is not young. Fiona is quiet. Fiona is not round. Kind, young things are not sma...",
+          "output": "not entailment",
+          "metadata_config": "depth-1",
+          "metadata_hop_depth": 1,
+          "metadata_task_type": "logical_entailment"
+        },
+        {
+          "input": "Context: Anne is quiet. Anne is not young. Bob is kind. Bob is young. Dave is rough. Dave is round. Dave is smart. Dave is not young. Fiona is quiet. Fiona is not round. Kind, young things are not sma...",
+          "output": "entailment",
+          "metadata_config": "depth-1",
+          "metadata_hop_depth": 1,
+          "metadata_task_type": "logical_entailment"
+        }
+      ]
+    },
+    {
+      "dataset": "ProofWriter",
+      "examples": [
+        {
+          "input": "Theory: Gary is furry. Gary is nice. Gary is red. Gary is rough. Gary is not smart. Gary is white. Gary is young. If Gary is nice and Gary is not white then Gary is red. If someone is white then they ...",
+          "output": "True",
+          "metadata_source_id": "AttNeg-OWA-D0-4611",
+          "metadata_hop_depth": 0,
+          "metadata_config": "depth-0",
+          "metadata_n_facts": 7,
+          "metadata_n_rules": 8,
+          "metadata_task_type": "proof_question_answering"
+        },
+        {
+          "input": "Theory: Gary is furry. Gary is nice. Gary is red. Gary is rough. Gary is not smart. Gary is white. Gary is young. If Gary is nice and Gary is not white then Gary is red. If someone is white then they ...",
+          "output": "False",
+          "metadata_source_id": "AttNeg-OWA-D0-4611",
+          "metadata_hop_depth": 0,
+          "metadata_config": "depth-0",
+          "metadata_n_facts": 7,
+          "metadata_n_rules": 8,
+          "metadata_task_type": "proof_question_answering"
+        },
+        {
+          "input": "Theory: Bob is furry. Dave is quiet. Harry is big. Rough things are white. All rough things are white. If Dave is rough then Dave is green.\nQuestion: Bob is furry.\nAnswer True or False.",
+          "output": "True",
+          "metadata_source_id": "AttNoneg-OWA-D0-3321",
+          "metadata_hop_depth": 0,
+          "metadata_config": "depth-0",
+          "metadata_n_facts": 3,
+          "metadata_n_rules": 3,
+          "metadata_task_type": "proof_question_answering"
+        }
+      ]
+    }
+  ]
+}

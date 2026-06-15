@@ -1,0 +1,632 @@
+{
+  "metadata": {
+    "method_name": "RFDE",
+    "description": "Resolution-Failure-Directed Extraction: demand-driven atomic fact extraction vs CoT, RAG+BM25, LINC eager-translation baselines",
+    "model": "anthropic/claude-haiku-4-5",
+    "n_per_dataset": 50,
+    "total_tasks": 134,
+    "total_cost_usd": 1.142,
+    "seed": 42,
+    "method_metrics": {
+      "cot": {
+        "CLUTRR_v1": {
+          "overall": 0.3888888888888889,
+          "by_class": {
+            "grandmother": 0.5,
+            "mother": 0.0,
+            "granddaughter": 0.0,
+            "niece": 0.0,
+            "daughter": 0.0,
+            "daughter-in-law": 0.0,
+            "son-in-law": 1.0,
+            "uncle": 1.0,
+            "nephew": 0.0,
+            "mother-in-law": 0.0,
+            "father-in-law": 0.0,
+            "grandson": 0.0,
+            "grandfather": 1.0,
+            "aunt": 0.5,
+            "son": 0.5,
+            "brother": 1.0,
+            "sister": 1.0,
+            "father": 0.5
+          },
+          "total": 36
+        },
+        "RuleTaker": {
+          "overall": 0.64,
+          "by_class": {
+            "entailment": 0.28,
+            "not entailment": 1.0
+          },
+          "total": 50
+        },
+        "ProofWriter": {
+          "overall": 0.6458333333333334,
+          "by_class": {
+            "True": 0.9375,
+            "False": 1.0,
+            "Unknown": 0.0
+          },
+          "total": 48
+        },
+        "overall": {
+          "overall": 0.5746268656716418,
+          "by_class": {
+            "grandmother": 0.5,
+            "mother": 0.0,
+            "granddaughter": 0.0,
+            "niece": 0.0,
+            "daughter": 0.0,
+            "daughter-in-law": 0.0,
+            "son-in-law": 1.0,
+            "uncle": 1.0,
+            "nephew": 0.0,
+            "mother-in-law": 0.0,
+            "father-in-law": 0.0,
+            "grandson": 0.0,
+            "grandfather": 1.0,
+            "aunt": 0.5,
+            "son": 0.5,
+            "brother": 1.0,
+            "sister": 1.0,
+            "father": 0.5,
+            "entailment": 0.28,
+            "not entailment": 1.0,
+            "True": 0.9375,
+            "False": 1.0,
+            "Unknown": 0.0
+          },
+          "total": 134
+        },
+        "hallucination_rate": 0.0
+      },
+      "rag": {
+        "CLUTRR_v1": {
+          "overall": 0.1388888888888889,
+          "by_class": {
+            "grandmother": 0.5,
+            "mother": 0.0,
+            "granddaughter": 0.0,
+            "niece": 0.0,
+            "daughter": 0.5,
+            "daughter-in-law": 0.0,
+            "son-in-law": 0.0,
+            "uncle": 0.5,
+            "nephew": 0.0,
+            "mother-in-law": 0.0,
+            "father-in-law": 0.0,
+            "grandson": 0.0,
+            "grandfather": 0.5,
+            "aunt": 0.0,
+            "son": 0.0,
+            "brother": 0.0,
+            "sister": 0.5,
+            "father": 0.0
+          },
+          "total": 36
+        },
+        "RuleTaker": {
+          "overall": 0.52,
+          "by_class": {
+            "entailment": 0.04,
+            "not entailment": 1.0
+          },
+          "total": 50
+        },
+        "ProofWriter": {
+          "overall": 0.4583333333333333,
+          "by_class": {
+            "True": 0.75,
+            "False": 0.625,
+            "Unknown": 0.0
+          },
+          "total": 48
+        },
+        "overall": {
+          "overall": 0.39552238805970147,
+          "by_class": {
+            "grandmother": 0.5,
+            "mother": 0.0,
+            "granddaughter": 0.0,
+            "niece": 0.0,
+            "daughter": 0.5,
+            "daughter-in-law": 0.0,
+            "son-in-law": 0.0,
+            "uncle": 0.5,
+            "nephew": 0.0,
+            "mother-in-law": 0.0,
+            "father-in-law": 0.0,
+            "grandson": 0.0,
+            "grandfather": 0.5,
+            "aunt": 0.0,
+            "son": 0.0,
+            "brother": 0.0,
+            "sister": 0.5,
+            "father": 0.0,
+            "entailment": 0.04,
+            "not entailment": 1.0,
+            "True": 0.75,
+            "False": 0.625,
+            "Unknown": 0.0
+          },
+          "total": 134
+        },
+        "hallucination_rate": 0.0
+      },
+      "linc": {
+        "CLUTRR_v1": {
+          "overall": 0.25,
+          "by_class": {
+            "grandmother": 0.5,
+            "mother": 0.0,
+            "granddaughter": 0.0,
+            "niece": 0.0,
+            "daughter": 0.0,
+            "daughter-in-law": 0.0,
+            "son-in-law": 1.0,
+            "uncle": 0.5,
+            "nephew": 0.0,
+            "mother-in-law": 0.5,
+            "father-in-law": 0.0,
+            "grandson": 0.0,
+            "grandfather": 0.5,
+            "aunt": 1.0,
+            "son": 0.0,
+            "brother": 0.5,
+            "sister": 0.0,
+            "father": 0.0
+          },
+          "total": 36
+        },
+        "RuleTaker": {
+          "overall": 0.54,
+          "by_class": {
+            "entailment": 0.08,
+            "not entailment": 1.0
+          },
+          "total": 50
+        },
+        "ProofWriter": {
+          "overall": 0.6041666666666666,
+          "by_class": {
+            "True": 0.875,
+            "False": 0.9375,
+            "Unknown": 0.0
+          },
+          "total": 48
+        },
+        "overall": {
+          "overall": 0.48507462686567165,
+          "by_class": {
+            "grandmother": 0.5,
+            "mother": 0.0,
+            "granddaughter": 0.0,
+            "niece": 0.0,
+            "daughter": 0.0,
+            "daughter-in-law": 0.0,
+            "son-in-law": 1.0,
+            "uncle": 0.5,
+            "nephew": 0.0,
+            "mother-in-law": 0.5,
+            "father-in-law": 0.0,
+            "grandson": 0.0,
+            "grandfather": 0.5,
+            "aunt": 1.0,
+            "son": 0.0,
+            "brother": 0.5,
+            "sister": 0.0,
+            "father": 0.0,
+            "entailment": 0.08,
+            "not entailment": 1.0,
+            "True": 0.875,
+            "False": 0.9375,
+            "Unknown": 0.0
+          },
+          "total": 134
+        },
+        "hallucination_rate": 0.0
+      },
+      "rfde": {
+        "CLUTRR_v1": {
+          "overall": 0.1111111111111111,
+          "by_class": {
+            "grandmother": 0.0,
+            "mother": 0.0,
+            "granddaughter": 0.0,
+            "niece": 0.0,
+            "daughter": 0.0,
+            "daughter-in-law": 0.5,
+            "son-in-law": 1.0,
+            "uncle": 0.5,
+            "nephew": 0.0,
+            "mother-in-law": 0.0,
+            "father-in-law": 0.0,
+            "grandson": 0.0,
+            "grandfather": 0.0,
+            "aunt": 0.0,
+            "son": 0.0,
+            "brother": 0.0,
+            "sister": 0.0,
+            "father": 0.0
+          },
+          "total": 36
+        },
+        "RuleTaker": {
+          "overall": 0.72,
+          "by_class": {
+            "entailment": 0.44,
+            "not entailment": 1.0
+          },
+          "total": 50
+        },
+        "ProofWriter": {
+          "overall": 0.6041666666666666,
+          "by_class": {
+            "True": 0.875,
+            "False": 0.9375,
+            "Unknown": 0.0
+          },
+          "total": 48
+        },
+        "overall": {
+          "overall": 0.5149253731343284,
+          "by_class": {
+            "grandmother": 0.0,
+            "mother": 0.0,
+            "granddaughter": 0.0,
+            "niece": 0.0,
+            "daughter": 0.0,
+            "daughter-in-law": 0.5,
+            "son-in-law": 1.0,
+            "uncle": 0.5,
+            "nephew": 0.0,
+            "mother-in-law": 0.0,
+            "father-in-law": 0.0,
+            "grandson": 0.0,
+            "grandfather": 0.0,
+            "aunt": 0.0,
+            "son": 0.0,
+            "brother": 0.0,
+            "sister": 0.0,
+            "father": 0.0,
+            "entailment": 0.44,
+            "not entailment": 1.0,
+            "True": 0.875,
+            "False": 0.9375,
+            "Unknown": 0.0
+          },
+          "total": 134
+        },
+        "hallucination_rate": 0.75,
+        "atomic_decomposition_count": 123,
+        "direct_query_count": 11
+      }
+    },
+    "comparisons": {
+      "rfde_vs_linc_CLUTRR_v1": {
+        "chi2": 2.2857,
+        "p_value": 0.1306,
+        "b": 1,
+        "c": 6,
+        "significant": false
+      },
+      "rfde_vs_cot_CLUTRR_v1": {
+        "chi2": 6.75,
+        "p_value": 0.0094,
+        "b": 1,
+        "c": 11,
+        "significant": true
+      },
+      "rfde_vs_linc_RuleTaker": {
+        "chi2": 7.1111,
+        "p_value": 0.0077,
+        "b": 9,
+        "c": 0,
+        "significant": true
+      },
+      "rfde_vs_cot_RuleTaker": {
+        "chi2": 1.5,
+        "p_value": 0.2207,
+        "b": 5,
+        "c": 1,
+        "significant": false
+      },
+      "rfde_vs_linc_ProofWriter": {
+        "chi2": 0.25,
+        "p_value": 0.6171,
+        "b": 2,
+        "c": 2,
+        "significant": false
+      },
+      "rfde_vs_cot_ProofWriter": {
+        "chi2": 0.5,
+        "p_value": 0.4795,
+        "b": 0,
+        "c": 2,
+        "significant": false
+      },
+      "rfde_vs_linc_all": {
+        "chi2": 0.45,
+        "p_value": 0.5023,
+        "b": 12,
+        "c": 8,
+        "significant": false
+      },
+      "rfde_vs_cot_all": {
+        "chi2": 2.45,
+        "p_value": 0.1175,
+        "b": 6,
+        "c": 14,
+        "significant": false
+      }
+    },
+    "hallucination_rates": {
+      "cot": 0.0,
+      "rag": 0.0,
+      "linc": 0.0,
+      "rfde": 0.75
+    },
+    "hallucination_reduction_vs_linc_pct": 0.0
+  },
+  "datasets": [
+    {
+      "dataset": "CLUTRR_v1",
+      "examples": [
+        {
+          "input": "Story: [Michelle] and her son, [Paul] are very close. Unfortunately, [Paul] and his daughter, [Claire] are not. [Paul] helped his brother, [James], study for the chemistry exam.\nQuery: What is the kin...",
+          "output": "grandmother",
+          "metadata_source_id": "c49bde3d-d9db-4e07-9358-cabc375495e8",
+          "metadata_hop_depth": 2,
+          "metadata_task_name": "task_3.2",
+          "metadata_relation_chain": "father-mother",
+          "metadata_proof_state": "[{('Claire', 'grandmother', 'Michelle'): [('Claire', 'father', 'Paul'), ('Paul', 'mother', 'Michelle')]}]",
+          "metadata_task_type": "kinship_classification",
+          "predict_cot": "granddaughter",
+          "metadata_pred_cot_confidence": 0.75,
+          "metadata_pred_cot_asserted_preds": "[]",
+          "predict_rag": "granddaughter",
+          "metadata_pred_rag_confidence": 0.75,
+          "metadata_pred_rag_asserted_preds": "[]",
+          "metadata_pred_rag_retrieved": "[\"[Paul] helped his brother, [James], study for the chemistry exam\", \"Unfortunately, [Paul] and his daughter, [Claire] are not\", \"Story: [Michelle] and her son, [Paul] are very close\"]",
+          "predict_linc": "grandmother",
+          "metadata_pred_linc_confidence": 1.0,
+          "metadata_pred_linc_asserted_preds": "[{\"predicate\": \"close(michelle, paul)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"close(paul, michelle)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"not_close(paul, ...",
+          "metadata_pred_linc_kb_size": 10,
+          "predict_rfde": "daughter-in-law",
+          "metadata_pred_rfde_confidence": 0.95,
+          "metadata_pred_rfde_asserted_preds": "[{\"predicate\": \"son_in_law(claire,michelle)\", \"source\": \"llm_demand\", \"supported\": false, \"confidence\": 0.95}, {\"predicate\": \"daughter_in_law(claire,michelle)\", \"source\": \"llm_demand\", \"supported\": tr...",
+          "metadata_pred_rfde_decomp_type": "atomic",
+          "metadata_pred_rfde_violations": 0,
+          "metadata_pred_rfde_proof_trace": "[{\"step\": 1, \"goal\": \"son_in_law(claire,michelle)\", \"source\": \"llm\", \"outcome\": \"failure\", \"depth\": 0, \"llm_snippet\": \"Answer: no | Confidence: 0.95\\n\\nExplanation: The document states that Claire is ...",
+          "metadata_pred_rfde_llm_calls": 2
+        },
+        {
+          "input": "Story: [Lillian] and her daughter [April] went out for ice cream. [Lillian] got a cone and [April] got a sundae. [Ashley] is a girl with a grandmother named [April].\nQuery: What is the kinship relatio...",
+          "output": "mother",
+          "metadata_source_id": "181f6439-f2a7-436c-8f02-566cec8acfec",
+          "metadata_hop_depth": 2,
+          "metadata_task_name": "task_1.2",
+          "metadata_relation_chain": "daughter-grandmother",
+          "metadata_proof_state": "[{('Lillian', 'mother', 'Ashley'): [('Lillian', 'daughter', 'April'), ('April', 'grandmother', 'Ashley')]}]",
+          "metadata_task_type": "kinship_classification",
+          "predict_cot": "great-grandmother",
+          "metadata_pred_cot_confidence": 0.75,
+          "metadata_pred_cot_asserted_preds": "[]",
+          "predict_rag": "great-grandmother",
+          "metadata_pred_rag_confidence": 0.75,
+          "metadata_pred_rag_asserted_preds": "[]",
+          "metadata_pred_rag_retrieved": "[\"[Ashley] is a girl with a grandmother named [April]\", \"[Lillian] got a cone and [April] got a sundae\", \"Story: [Lillian] and her daughter [April] went out for ice cream\"]",
+          "predict_linc": "grandmother",
+          "metadata_pred_linc_confidence": 1.0,
+          "metadata_pred_linc_asserted_preds": "[{\"predicate\": \"went_out(lillian, april)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"got(lillian, cone)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"got(april, sunda...",
+          "metadata_pred_linc_kb_size": 6,
+          "predict_rfde": "unknown",
+          "metadata_pred_rfde_confidence": 0.3,
+          "metadata_pred_rfde_asserted_preds": "[{\"predicate\": \"son_in_law(lillian,ashley)\", \"source\": \"llm_demand\", \"supported\": false, \"confidence\": 0.95}, {\"predicate\": \"daughter_in_law(lillian,ashley)\", \"source\": \"llm_demand\", \"supported\": fals...",
+          "metadata_pred_rfde_decomp_type": "atomic",
+          "metadata_pred_rfde_violations": 0,
+          "metadata_pred_rfde_proof_trace": "[{\"step\": 1, \"goal\": \"son_in_law(lillian,ashley)\", \"source\": \"llm\", \"outcome\": \"failure\", \"depth\": 0, \"llm_snippet\": \"Answer: no | Confidence: 0.95\\n\\nReasoning: The document states that Lillian and A...",
+          "metadata_pred_rfde_llm_calls": 49
+        },
+        {
+          "input": "Story: [Ashley] was so excited to learn that her son [Wayne] got accepted into college. [Wayne] was unhappy with his daughter, [Linda], when she drove his Mercedes without asking for his permission.\nQ...",
+          "output": "granddaughter",
+          "metadata_source_id": "246ba807-42f5-4ec3-8a71-d805386ec4d8",
+          "metadata_hop_depth": 2,
+          "metadata_task_name": "task_1.2",
+          "metadata_relation_chain": "son-daughter",
+          "metadata_proof_state": "[{('Ashley', 'granddaughter', 'Linda'): [('Ashley', 'son', 'Wayne'), ('Wayne', 'daughter', 'Linda')]}]",
+          "metadata_task_type": "kinship_classification",
+          "predict_cot": "grandmother",
+          "metadata_pred_cot_confidence": 0.75,
+          "metadata_pred_cot_asserted_preds": "[]",
+          "predict_rag": "grandmother",
+          "metadata_pred_rag_confidence": 0.75,
+          "metadata_pred_rag_asserted_preds": "[]",
+          "metadata_pred_rag_retrieved": "[\"Story: [Ashley] was so excited to learn that her son [Wayne] got accepted into college\", \"[Wayne] was unhappy with his daughter, [Linda], when she drove his Mercedes without asking for his permissio...",
+          "predict_linc": "grandmother",
+          "metadata_pred_linc_confidence": 1.0,
+          "metadata_pred_linc_asserted_preds": "[{\"predicate\": \"parent(ashley, wayne)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"accepted(wayne, college)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"excited(ashle...",
+          "metadata_pred_linc_kb_size": 8,
+          "predict_rfde": "grandmother",
+          "metadata_pred_rfde_confidence": 0.95,
+          "metadata_pred_rfde_asserted_preds": "[{\"predicate\": \"son_in_law(ashley,linda)\", \"source\": \"llm_demand\", \"supported\": false, \"confidence\": 0.95}, {\"predicate\": \"daughter_in_law(ashley,linda)\", \"source\": \"llm_demand\", \"supported\": false, \"...",
+          "metadata_pred_rfde_decomp_type": "atomic",
+          "metadata_pred_rfde_violations": 0,
+          "metadata_pred_rfde_proof_trace": "[{\"step\": 1, \"goal\": \"son_in_law(ashley,linda)\", \"source\": \"llm\", \"outcome\": \"failure\", \"depth\": 0, \"llm_snippet\": \"Answer: no | Confidence: 0.95\\n\\nReasoning: The document states that Ashley is Wayne...",
+          "metadata_pred_rfde_llm_calls": 18
+        }
+      ]
+    },
+    {
+      "dataset": "RuleTaker",
+      "examples": [
+        {
+          "input": "Context: The bald eagle eats the tiger. The bald eagle is round. The bald eagle is young. The bald eagle needs the tiger. The bald eagle sees the tiger. The tiger is round. The tiger sees the bald eag...",
+          "output": "entailment",
+          "metadata_config": "depth-1",
+          "metadata_hop_depth": 1,
+          "metadata_task_type": "logical_entailment",
+          "predict_cot": "not entailment",
+          "metadata_pred_cot_confidence": 0.75,
+          "metadata_pred_cot_asserted_preds": "[]",
+          "predict_rag": "not entailment",
+          "metadata_pred_rag_confidence": 0.75,
+          "metadata_pred_rag_asserted_preds": "[]",
+          "metadata_pred_rag_retrieved": "[\"If someone sees the tiger and the tiger sees the bald eagle then the tiger does not need the bald eagle\", \"If someone is red then they need the tiger\", \"If someone is not blue and they do not see th...",
+          "predict_linc": "not entailment",
+          "metadata_pred_linc_confidence": 1.0,
+          "metadata_pred_linc_asserted_preds": "[{\"predicate\": \"eats(bald_eagle, tiger)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"round(bald_eagle)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"young(bald_eagle)\"...",
+          "metadata_pred_linc_kb_size": 13,
+          "predict_rfde": "not entailment",
+          "metadata_pred_rfde_confidence": 0.75,
+          "metadata_pred_rfde_asserted_preds": "[{\"predicate\": \"sees(bald_eagle, tiger)\", \"source\": \"llm_demand\", \"supported\": true, \"confidence\": 0.95}, {\"predicate\": \"sees(tiger, bald_eagle)\", \"source\": \"llm_demand\", \"supported\": true, \"confidenc...",
+          "metadata_pred_rfde_decomp_type": "atomic",
+          "metadata_pred_rfde_violations": 0,
+          "metadata_pred_rfde_proof_trace": "[{\"step\": 1, \"goal\": \"sees(bald_eagle, tiger)\", \"source\": \"llm\", \"outcome\": \"success\", \"depth\": 0, \"llm_snippet\": \"Answer: yes | Confidence: 0.95\\n\\n**Reasoning:** The fact \\\"sees(bald_eagle, tiger)\\\"...",
+          "metadata_pred_rfde_llm_calls": 5
+        },
+        {
+          "input": "Context: The cat is cold. The cat is kind. The cat likes the rabbit. The rabbit eats the cat. The rabbit is cold. The rabbit is green. The rabbit is kind. The rabbit is red. The rabbit likes the cat. ...",
+          "output": "entailment",
+          "metadata_config": "depth-3",
+          "metadata_hop_depth": 3,
+          "metadata_task_type": "logical_entailment",
+          "predict_cot": "not entailment",
+          "metadata_pred_cot_confidence": 0.75,
+          "metadata_pred_cot_asserted_preds": "[]",
+          "predict_rag": "not entailment",
+          "metadata_pred_rag_confidence": 0.75,
+          "metadata_pred_rag_asserted_preds": "[]",
+          "metadata_pred_rag_retrieved": "[\"The rabbit likes the cat\", \"The rabbit needs the cat\", \"The rabbit eats the cat\"]",
+          "predict_linc": "not entailment",
+          "metadata_pred_linc_confidence": 1.0,
+          "metadata_pred_linc_asserted_preds": "[{\"predicate\": \"cold(cat)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"kind(cat)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"likes(cat, rabbit)\", \"source\": \"llm_upfr...",
+          "metadata_pred_linc_kb_size": 18,
+          "predict_rfde": "not entailment",
+          "metadata_pred_rfde_confidence": 0.75,
+          "metadata_pred_rfde_asserted_preds": "[{\"predicate\": \"likes(cat, rabbit)\", \"source\": \"llm_demand\", \"supported\": true, \"confidence\": 0.95}, {\"predicate\": \"likes(rabbit, cat)\", \"source\": \"llm_demand\", \"supported\": true, \"confidence\": 0.99}]",
+          "metadata_pred_rfde_decomp_type": "atomic",
+          "metadata_pred_rfde_violations": 0,
+          "metadata_pred_rfde_proof_trace": "[{\"step\": 1, \"goal\": \"likes(cat, rabbit)\", \"source\": \"llm\", \"outcome\": \"success\", \"depth\": 0, \"llm_snippet\": \"Answer: yes | Confidence: 0.95\\n\\nThe fact \\\"likes(cat, rabbit)\\\" is directly stated in th...",
+          "metadata_pred_rfde_llm_calls": 2
+        },
+        {
+          "input": "Context: The bear needs the rabbit. The bear does not visit the mouse. The mouse chases the rabbit. The mouse chases the squirrel. The mouse is kind. The mouse is round. The mouse needs the squirrel. ...",
+          "output": "not entailment",
+          "metadata_config": "depth-5",
+          "metadata_hop_depth": 5,
+          "metadata_task_type": "logical_entailment",
+          "predict_cot": "not entailment",
+          "metadata_pred_cot_confidence": 0.75,
+          "metadata_pred_cot_asserted_preds": "[]",
+          "predict_rag": "not entailment",
+          "metadata_pred_rag_confidence": 0.75,
+          "metadata_pred_rag_asserted_preds": "[]",
+          "metadata_pred_rag_retrieved": "[\"If the mouse does not chase the squirrel then the mouse visits the rabbit\", \"The bear does not visit the mouse\", \"The mouse visits the bear\"]",
+          "predict_linc": "not entailment",
+          "metadata_pred_linc_confidence": 1.0,
+          "metadata_pred_linc_asserted_preds": "[{\"predicate\": \"needs(bear, rabbit)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"chases(mouse, rabbit)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"chases(mouse, squi...",
+          "metadata_pred_linc_kb_size": 14,
+          "predict_rfde": "not entailment",
+          "metadata_pred_rfde_confidence": 0.75,
+          "metadata_pred_rfde_asserted_preds": "[{\"predicate\": \"round(mouse)\", \"source\": \"llm_demand\", \"supported\": true, \"confidence\": 0.99}, {\"predicate\": \"red(X) \\u2192 visits(X, rabbit)\", \"source\": \"llm_demand\", \"supported\": true, \"confidence\":...",
+          "metadata_pred_rfde_decomp_type": "atomic",
+          "metadata_pred_rfde_violations": 0,
+          "metadata_pred_rfde_proof_trace": "[{\"step\": 1, \"goal\": \"round(mouse)\", \"source\": \"llm\", \"outcome\": \"success\", \"depth\": 0, \"llm_snippet\": \"Answer: yes | Confidence: 0.99\\n\\nThe document directly states \\\"The mouse is round\\\" in the giv...",
+          "metadata_pred_rfde_llm_calls": 4
+        }
+      ]
+    },
+    {
+      "dataset": "ProofWriter",
+      "examples": [
+        {
+          "input": "Theory: Charlie is big. Charlie is furry. Charlie is nice. Charlie is rough. Charlie is round. Charlie is white. Charlie is young. Fiona is big. Fiona is furry. Fiona is nice. Fiona is rough. Fiona is...",
+          "output": "True",
+          "metadata_source_id": "AttNoneg-OWA-D0-4598",
+          "metadata_hop_depth": 0,
+          "metadata_config": "depth-0",
+          "metadata_n_facts": 14,
+          "metadata_n_rules": 8,
+          "metadata_task_type": "proof_question_answering",
+          "predict_cot": "True",
+          "metadata_pred_cot_confidence": 0.75,
+          "metadata_pred_cot_asserted_preds": "[]",
+          "predict_rag": "False",
+          "metadata_pred_rag_confidence": 0.75,
+          "metadata_pred_rag_asserted_preds": "[]",
+          "metadata_pred_rag_retrieved": "[\"Fiona is furry\", \"Fiona is nice\", \"Fiona is round\"]",
+          "predict_linc": "True",
+          "metadata_pred_linc_confidence": 1.0,
+          "metadata_pred_linc_asserted_preds": "[{\"predicate\": \"big(charlie)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"furry(charlie)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"nice(charlie)\", \"source\": \"llm_u...",
+          "metadata_pred_linc_kb_size": 22,
+          "predict_rfde": "True",
+          "metadata_pred_rfde_confidence": 0.75,
+          "metadata_pred_rfde_asserted_preds": "[{\"predicate\": \"white(Fiona)\", \"source\": \"llm_demand\", \"supported\": true, \"confidence\": 0.99}]",
+          "metadata_pred_rfde_decomp_type": "atomic",
+          "metadata_pred_rfde_violations": 0,
+          "metadata_pred_rfde_proof_trace": "[{\"step\": 1, \"goal\": \"white(Fiona)\", \"source\": \"llm\", \"outcome\": \"success\", \"depth\": 0, \"llm_snippet\": \"Answer: yes | Confidence: 0.99\\n\\nThe fact \\\"white(Fiona)\\\" is directly stated in the document. ...",
+          "metadata_pred_rfde_llm_calls": 1
+        },
+        {
+          "input": "Theory: Young Alan got into a fight that left him with red sores on his face. Bob, a green man, was also big, but underneath he was kind. Dave happens to be nice and green even though he is big and co...",
+          "output": "False",
+          "metadata_source_id": "AttNonegNatLang-OWA-1316",
+          "metadata_hop_depth": 1,
+          "metadata_config": "NatLang",
+          "metadata_n_facts": 12,
+          "metadata_n_rules": 7,
+          "metadata_task_type": "proof_question_answering",
+          "predict_cot": "False",
+          "metadata_pred_cot_confidence": 0.9,
+          "metadata_pred_cot_asserted_preds": "[]",
+          "predict_rag": "True",
+          "metadata_pred_rag_confidence": 0.75,
+          "metadata_pred_rag_asserted_preds": "[]",
+          "metadata_pred_rag_retrieved": "[\"Dave happens to be nice and green even though he is big and cold\", \"A downhearted blue person who is kind is round\", \"Eric is big and round man that is looking rather green after seeing some bad may...",
+          "predict_linc": "False",
+          "metadata_pred_linc_confidence": 1.0,
+          "metadata_pred_linc_asserted_preds": "[{\"predicate\": \"got_into_fight(alan)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"has_red_sores(alan)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"is_green(bob)\", \"so...",
+          "metadata_pred_linc_kb_size": 23,
+          "predict_rfde": "True",
+          "metadata_pred_rfde_confidence": 0.75,
+          "metadata_pred_rfde_asserted_preds": "[{\"predicate\": \"nice(dave)\", \"source\": \"llm_demand\", \"supported\": true, \"confidence\": 0.95}, {\"predicate\": \"green(dave)\", \"source\": \"llm_demand\", \"supported\": true, \"confidence\": 0.95}, {\"predicate\": ...",
+          "metadata_pred_rfde_decomp_type": "atomic",
+          "metadata_pred_rfde_violations": 0,
+          "metadata_pred_rfde_proof_trace": "[{\"step\": 1, \"goal\": \"nice(dave)\", \"source\": \"llm\", \"outcome\": \"success\", \"depth\": 0, \"llm_snippet\": \"Answer: yes | Confidence: 0.95\\n\\nThe document directly states: \\\"Dave happens to be nice and gree...",
+          "metadata_pred_rfde_llm_calls": 4
+        },
+        {
+          "input": "Theory: Charlie is blue. Charlie is furry. Charlie is nice. Charlie is rough. Charlie is round. Charlie is smart. Erin is blue. Erin is cold. Erin is furry. Erin is rough. If something is round and sm...",
+          "output": "True",
+          "metadata_source_id": "AttNoneg-OWA-D0-5221",
+          "metadata_hop_depth": 0,
+          "metadata_config": "depth-0",
+          "metadata_n_facts": 10,
+          "metadata_n_rules": 8,
+          "metadata_task_type": "proof_question_answering",
+          "predict_cot": "True",
+          "metadata_pred_cot_confidence": 0.75,
+          "metadata_pred_cot_asserted_preds": "[]",
+          "predict_rag": "True",
+          "metadata_pred_rag_confidence": 0.75,
+          "metadata_pred_rag_asserted_preds": "[]",
+          "metadata_pred_rag_retrieved": "[\"If Erin is blue and Erin is rough then Erin is round\", \"Erin is rough\", \"Erin is blue\"]",
+          "predict_linc": "True",
+          "metadata_pred_linc_confidence": 1.0,
+          "metadata_pred_linc_asserted_preds": "[{\"predicate\": \"blue(charlie)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"furry(charlie)\", \"source\": \"llm_upfront\", \"confidence\": 0.8}, {\"predicate\": \"nice(charlie)\", \"source\": \"llm_...",
+          "metadata_pred_linc_kb_size": 17,
+          "predict_rfde": "True",
+          "metadata_pred_rfde_confidence": 0.75,
+          "metadata_pred_rfde_asserted_preds": "[{\"predicate\": \"furry(Erin)\", \"source\": \"llm_demand\", \"supported\": true, \"confidence\": 0.95}, {\"predicate\": \"rough(Erin)\", \"source\": \"llm_demand\", \"supported\": true, \"confidence\": 0.95}]",
+          "metadata_pred_rfde_decomp_type": "atomic",
+          "metadata_pred_rfde_violations": 0,
+          "metadata_pred_rfde_proof_trace": "[{\"step\": 1, \"goal\": \"furry(Erin)\", \"source\": \"llm\", \"outcome\": \"success\", \"depth\": 0, \"llm_snippet\": \"Answer: yes | Confidence: 0.95\\n\\n**Reasoning:** The document directly states \\\"Erin is furry\\\" i...",
+          "metadata_pred_rfde_llm_calls": 2
+        }
+      ]
+    }
+  ]
+}

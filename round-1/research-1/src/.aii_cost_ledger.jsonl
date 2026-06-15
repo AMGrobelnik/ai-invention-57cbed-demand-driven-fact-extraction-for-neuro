@@ -1,0 +1,27 @@
+{"ts": 1781534657.3533134, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "LINC neuro-symbolic reasoning Olausson EMNLP 2023", "count": 10}
+{"ts": 1781534661.9649518, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "Logic-LM Pan EMNLP 2023 findings", "count": 8}
+{"ts": 1781534664.8526208, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "LAMBADA Kazemi backward chaining logical reasoning ACL 2023", "count": 8}
+{"ts": 1781534668.2686055, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "HBLR confidence thresholding logical reasoning Li AAAI 2026", "count": 8}
+{"ts": 1781534674.714908, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "ARGOS abductive reasoning generalization commonsense 2026", "count": 8}
+{"ts": 1781534677.352239, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "CLUTRR benchmark multi-hop family relations compositional reasoning", "count": 8}
+{"ts": 1781534680.1683095, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "RuleTaker benchmark deductive reasoning depth stratified", "count": 8}
+{"ts": 1781534682.7725642, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "FOLIO first-order logic inference benchmark premise sets", "count": 8}
+{"ts": 1781534685.3219192, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "ProofWriter synthetic logical proof generation natural language", "count": 8}
+{"ts": 1781534688.3762863, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "HotpotQA multi-hop question answering Wikipedia evidence", "count": 8}
+{"ts": 1781534691.2419708, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "FEVER fact extraction verification Wikipedia evidence grounding", "count": 8}
+{"ts": 1781534695.3328824, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "PropBank semantic role labeling SRL annotation corpus", "count": 8}
+{"ts": 1781534698.7203467, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "FrameNet lexical unit semantic frames annotation", "count": 8}
+{"ts": 1781534701.9030232, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "entity extraction named entity recognition NER relation extraction pipeline", "count": 8}
+{"ts": 1781534704.782141, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "entity linking disambiguation entity resolution grounding", "count": 8}
+{"ts": 1781534711.7627757, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "LLM hallucination detection measurement unsupported facts factuality", "count": 8}
+{"ts": 1781534715.8443263, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "confidence calibration expected calibration error ECE deep learning", "count": 8}
+{"ts": 1781534719.2804513, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "knowledge graph construction information extraction pipeline NER RE", "count": 8}
+{"ts": 1781534722.7846248, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "adversarial robustness testing compositional generalization OOD distribution shift", "count": 8}
+{"ts": 1781534727.9439113, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "error analysis taxonomy NLP errors categorization root cause", "count": 8}
+{"ts": 1781534736.9959257, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "semantic similarity word embeddings BERT cosine similarity entity linking", "count": 8}
+{"ts": 1781534740.3650134, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "PySwip Prolog Python meta-interpreter assert retract", "count": 8}
+{"ts": 1781534745.9890742, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "RAG retrieval augmented generation benchmarks evaluation pipeline", "count": 8}
+{"ts": 1781534748.9688566, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "chain of thought prompting reasoning improvement LLM performance", "count": 8}
+{"ts": 1781534752.2237892, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "OpenCyc upper ontology knowledge base grounding semantic", "count": 8}
+{"ts": 1781534757.4062533, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "Cohen kappa inter-rater agreement NLP annotation agreement", "count": 8}
+{"ts": 1781534760.6765532, "tool": "aii_web_tools__search", "cost_usd": 0.001, "query": "commonsense knowledge gaps ConceptNet commonsense reasoning limitations", "count": 8}

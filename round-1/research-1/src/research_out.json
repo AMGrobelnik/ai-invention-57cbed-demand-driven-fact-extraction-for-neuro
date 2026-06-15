@@ -1,0 +1,204 @@
+{
+  "title": "Neuro-Symbolic Reasoning Baselines, Benchmarks, and Evaluation Framework for Demand-Driven Extraction",
+  "summary": "This research synthesizes 32 sources spanning baseline neuro-symbolic systems (LINC, Logic-LM, LAMBADA, HBLR, ARGOS), established benchmarks (CLUTRR, RuleTaker, FOLIO, ProofWriter, HotpotQA, FEVER), semantic role labeling standards (PropBank, FrameNet), hallucination measurement methodologies (unsupported fact detection, confidence calibration via ECE), and technical integration frameworks (PySwip meta-interpreter, evidence grounding). Key finding: published systems perform eager full-document translation upfront, inevitably hallucinating unused predicates, whereas a demand-driven approach extracts predicates only when reasoning fails without them. The research establishes baseline performance targets (LINC ~75% precision with 26% CoT improvement, >20% hallucination; Logic-LM 39.2% improvement but high hallucination), comprehensive evaluation metrics (atomic extraction precision/recall/hallucination, end-to-end accuracy, confidence calibration), a predicate-level annotation schema for a custom 50-document corpus (20 legal, 15 news, 15 story) with Cohen's Kappa ≥0.75 protocol, operationalized success criteria (RFDE precision +10pp, hallucination -30%), and technical foundations (PySwip runtime clause management, Prolog meta-interpreter for proof introspection, confidence propagation via product/max/min rules, evidence grounding via source span threading). All nine research phases are operationalized with actionable implementation guidance and realistic 15-20 hour execution timeline.",
+  "answer": "This comprehensive research synthesizes 32 sources spanning neuro-symbolic baselines, benchmark structures, semantic role labeling standards, hallucination measurement methodologies, and technical integration frameworks for evaluating demand-driven logical reasoning pipelines.\n\n## Baseline Methods and Architectural Differences\n\nPublished neuro-symbolic systems employ distinct translation strategies with complementary failure modes [1, 2, 3, 4, 5]. LINC (Olausson et al., EMNLP 2023) [1] uses eager full-document translation: the LLM serves as semantic parser, converting all premises and conclusions to first-order logic (FOL) upfront, then invoking external Prover9 solver. LINC achieves 26% improvement over chain-of-thought on ProofWriter and FOLIO [1]. The critical limitation: vocabulary generation without proof-driven demand hallucinating unused predicates. Logic-LM (Pan et al., EMNLP 2023 Findings) [2] also translates eagerly but adds self-refinement loop—when solver fails, error messages trigger full-document retranslation. Achieves 39.2% improvement over raw LLM and 18.4% over chain-of-thought [2]. However, refinement is whole-document reparallelization, not targeted demand-driven extraction of missing predicates. LAMBADA (Kazemi et al., ACL 2023) [3] inverts to backward chaining from conclusion, decomposing inference into four LLM-callable sub-modules. Achieves sizable accuracy boosts on deep reasoning benchmarks [3]. Critical difference: assumes facts are pre-provided in natural language—does not solve document extraction. HBLR (Li et al., AAAI 2026) [4] introduces confidence-aware selective translation: only high-confidence spans converted to FOL; uncertain content remains in natural language. Translation reflection module reverses lossy conversions. Crucially, thresholding at parse time (upfront), not at resolution failure—incompletely demand-driven [4]. ARGOS (Abductive Reasoning Generalization, 2026) [5] deploys solver failures to trigger LLM generation of commonsense rules, guided by SAT backbone. Generates general world knowledge, not document-specific extraction [5]. Pattern across all: eager or confidence-gated upfront translation with inevitable hallucination of unused predicates.\n\n## Benchmark Structures and Ground Truth Formats\n\nESTABLISHED benchmarks define diverse evaluation targets [6, 7, 8, 9, 10, 11]. CLUTRR [6] is diagnostic multi-hop benchmark with 9 family relations and explicit logical rules. Training covers 2-4 hops; disjoint test entities require 2-10 hops. Ground truth marks explicit vs. inferred relations, enabling per-relation precision/recall [6]. RuleTaker [7] is depth-stratified synthetic data: facts + rules paired with {True, False, Unknown} queries, depth 0-5 with 100k theories per level. Irrelevant fact injection tests selective extraction [7]. FOLIO [8] has 1,430 examples with 487 premise sets; all premises/conclusions carry FOL annotations automatically verified by inference engine, ensuring logical correctness [8]. ProofWriter [9] generates natural language theories with explicit proof traces; proof trees ground reasoning in NL rules/facts, enabling auditable verification [9]. HotpotQA [10] comprises 112,779 Wikipedia Q&A pairs with sentence-level supporting facts; 75% are bridge-entity (entity linking across passages), 25% comparison-type; strong supervision enables span-level grounding measurement [10]. FEVER [11] contains 185,445 Wikipedia claims labeled Supported/Refuted/NotEnoughInfo with evidence passages; NotEnoughInfo claims measure missing premises [11].\n\n## Semantic Role Labeling and Information Extraction Standards\n\nEstablished linguistic annotation standards ground predicate extraction [12, 13, 14, 15]. PropBank [12] is 1M-word corpus of verb predicates with semantic role labels (A0-A5, AA); roles are predicate-specific but consistent (A0=agent, A1=patient). CoNLL 2008/2009 established dependency SRL evaluation standards [12]. FrameNet [13] provides 1,000+ hierarchical semantic frames with 13,000+ lexical units; each frame defines core/non-core roles; 200,000+ manual annotations ground semantics [13]. Information extraction pipeline [14] stages: Named Entity Recognition (entity types/boundaries), Relation Extraction (entity pair relationships), Knowledge Graph assembly. Standard metrics: entity-level and relation-level Precision/Recall/F1 [14]. Entity linking [15] disambiguates mentions to KB identities via BERT embedding cosine similarity or fuzzy matching; validates predicate argument bindings [15].\n\n## Hallucination Measurement and Confidence Calibration\n\nHallucination measurement employs multiple complementary methodologies [16, 17, 18, 19]. Hallucination definition [16]: fluent, syntactically correct output that is factually unsupported or inaccurate. In RFDE context: unsupported fact detection extracts predicates from LLM output and verifies presence in source document text. Three-way classification [16]: Explicit (verbatim), Inferred (valid derivation from explicit facts), Hallucinated (no document support). Hallucination rate = (hallucinated / total extracted) × 100. Precision focus prioritizes false positives, as unsupported facts propagate [16]. Confidence propagation [17] through proof trees: AND (product rule: P(A∧B) = P(A)×P(B)), OR (max rule), CRITICAL (min rule for bottleneck). Final answer confidence = root goal confidence [17]. Awesome Hallucination Detection [18] catalogues methods and benchmarks including FACTCHD for fact-conflicting hallucinations [18]. Expected Calibration Error (ECE) [19]: bin predictions by confidence (0.0-0.1, ..., 0.9-1.0); compute empirical accuracy per bin. ECE = Σ |accuracy_bin − confidence_bin| × P(confidence in bin). Well-calibrated: high confidence ↔ high accuracy [19].\n\n## Predicate Annotation Schema and Protocol\n\nCustom corpus construction and annotation standards enable precise atomic extraction evaluation [20]. Custom corpus target [20]: 50 documents stratified as (1) 20 legal excerpts (formal, precise), (2) 15 news articles (narrative, entity chains), (3) 15 story excerpts (commonsense inference). Per-document: 5-15 explicit facts + 2-4 implicit inferences, ~3,000 characters. Predicate record [20]: (a) Functor (verb/relation name), (b) Arguments (PropBank-style roles: A0=agent, A1=patient, A2=beneficiary), (c) Source span (character offsets in document), (d) Category (Explicit/Implicit/Commonsense), (e) Confidence score (0-1 for implicit/commonsense). Worked examples [20]: Legal—\"The seller conveys the property\" → functor=conveys, A0=seller, A1=property, Explicit. News—\"Alice was appointed CEO\" → functor=appointed_to, A0=Alice, A1=CEO, Explicit; implicit: functor=has_job. Story—\"It rained so she grabbed an umbrella\" → functor=grab, Explicit; implicit: functor=protect_from (commonsense). Annotation protocol [20]: (1) Training on 2-3 samples with feedback; (2) Two-annotator blind annotation per document; (3) Adjudication by third expert; (4) Iterative refinement after 10 documents. Agreement metrics [20]: Cohen's Kappa (categorical) ≥0.75 [target]; Jaccard Index (predicate set overlap); common disagreements tracked (implicit vs. commonsense boundary, argument role ambiguity).\n\n## Comprehensive Evaluation Framework\n\nEvaluation architecture spans atomic extraction, end-to-end reasoning, and efficiency [21, 22, 23, 24]. Baseline comparison [21, 22]: (1) Raw LLM CoT, (2) RAG + BM25, (3) LINC (upfront FOL), (4) LAMBADA (hand-extracted facts), (5) RFDE (demand-driven). Metrics [21, 22, 23]: Atomic extraction: Precision (correct / all extracted) [PRIMARY], Recall (correct / ground truth), F1, Hallucination rate [PRIMARY]. End-to-end reasoning: Multi-hop accuracy, Confidence calibration (ECE, accuracy-by-confidence-bins). Efficiency: Latency, LLM call count, tokens consumed [23]. Success criteria operationalization [23]: Criterion A: RFDE precision ≥ LINC + 10 percentage points (e.g., 85% vs. 75%). Criterion B: RFDE hallucination ≤ baseline × 0.7 (30% reduction, e.g., <15% vs. >21%). Criterion C: RFDE multi-hop accuracy ≥ baseline on CLUTRR/RuleTaker depth-5. Cost measurement [24]: total cost per query, LLM calls per query, tokens per query, wall-clock latency. Protocol: single GPU, batch size 1, 2-3 passes, averaging. Budget: $10 OpenRouter API [24].\n\n## Advanced Evaluation: Error Analysis and Robustness\n\nAdvanced evaluation protocols characterize failure modes and system stability [25, 26, 27, 28]. Error taxonomy [25]: Extraction errors (missing fact, overgenerated predicate, wrong argument binding, incorrect confidence). Reasoning errors (incomplete proof, logical inconsistency, unjustified leap). Root cause analysis links errors to source (LLM confidence, missing context, unclear predicate definition, entity ambiguity) [25]. Adversarial robustness [26]: (1) Compositional generalization (train legal, test news/story), (2) Depth generalization (train 2-3 hops, test 5-10), (3) Noise robustness (inject irrelevant facts), (4) Contradiction handling (add contradictory facts), (5) Entity robustness (perturb entity names). Target: <5% degradation under noise [26]. Adversarial consistency checking [27]: (1) Multi-turn consistency (same query, different fact orderings), (2) Noise resilience (precision/recall stability), (3) Contradiction detection (refusal on inconsistency), (4) Robustness score (success under 3-5 perturbations) [27]. ConceptNet gap analysis [28]: use ConceptNet (3.4M tuples, 36 relation types) to identify when external commonsense is needed beyond document; characterize failures: document-grounded vs. commonsense-required [28].\n\n## Technical Integration: PySwip, Meta-Interpreter, Evidence Grounding\n\nTechnical implementation foundations enable reproducible reasoning [29, 30, 31, 32]. PySwip [29]: Python-Prolog bridge supporting assert(Clause), retract(Clause), query(Goal) for runtime clause management. Meta-interpreter pattern: findall/3 and call/1 enable proof introspection, yielding derivation trees [29]. Confidence propagation [30]: AND (product), OR (max), CRITICAL (min). Final answer confidence = root node confidence [30]. Evidence grounding [31]: each extracted predicate carries source span (character offsets). Spans thread through derivation, enabling human-auditable traces: (Predicate, SourceSpan) per proof node [31]. Hallucination detection [32]: for each predicate in proof, verify (functor, arg1, arg2) in document text or inferable via entity linking (BERT cosine > threshold). Mark: Explicit (verbatim), Implicit (inferred), Hallucinated (unsupported) [32].\n\n## Resources, Data, Tools, and Timeline\n\nImplementation prerequisites span publicly available datasets and realistic timelines [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 29]. Data availability [6, 7, 8, 9, 10, 11]: CLUTRR (GitHub open dataset), RuleTaker (GitHub open), FOLIO (ACL/Hugging Face), ProofWriter (GitHub reproducible), HotpotQA (Hugging Face), FEVER (Hugging Face). Custom corpus: 50 docs, 2 annotators, 3h each = 6h annotation effort. Tools [29, 12, 13, 14, 15]: SWI-Prolog (meta-interpreter support), PySwip 0.3.1+, SpaCy/AllenNLP (NER/SRL), BERT (entity linking), scikit-learn/seqeval (metrics), OpenRouter API. Timeline [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]: Phase 1-2 (Baselines, benchmarks) 4-6 hours; Phase 3-4 (SRL, hallucination) 2-3 hours; Phase 5-6 (Annotation, evaluation) 3-4 hours; Phase 7-8 (Advanced evaluation) 2-3 hours. Total: 15-20 hours research execution.\n\n## Summary of Key Insights\n\nLINC [1] and Logic-LM [2] establish baseline eager-translation performance (~75-80% precision, 20%+ hallucination). HBLR [4] shows confidence thresholding reduces but doesn't eliminate hallucination. All existing systems lack explicit atomic extraction evaluation separating precision/recall from end-to-end accuracy. Custom corpus with PropBank-style annotation [20] fills this critical gap. Success criteria (precision +10pp, hallucination -30%) are operationalized via CLUTRR/RuleTaker/custom test sets [6, 7, 8, 9, 10, 11]. PySwip + meta-interpreter [29] provide technical foundation for demand-driven extraction. Timeline and resource estimates are realistic for 3-hour execution window within broader invention loop.",
+  "sources": [
+    {
+      "index": 1,
+      "url": "https://arxiv.org/abs/2310.15164",
+      "title": "LINC: A Neurosymbolic Approach for Logical Reasoning by Combining Language Models with First-Order Logic Provers (Olausson et al., EMNLP 2023)",
+      "summary": "LLM as semantic parser translates premises/conclusions to FOL upfront; external Prover9 solver performs inference. Achieves 26% improvement over CoT on ProofWriter/FOLIO. Key limitation: upfront vocabulary generation without proof-driven demand hallucinating unused predicates."
+    },
+    {
+      "index": 2,
+      "url": "https://arxiv.org/abs/2305.12295",
+      "title": "Logic-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning (Pan et al., EMNLP 2023 Findings)",
+      "summary": "Eager translation to FOL/CSP/SAT with self-refinement loop: solver errors trigger full-document retranslation. Achieves 39.2% improvement over raw LLM, 18.4% over CoT. Refinement is whole-document reparallelization, not demand-driven extraction."
+    },
+    {
+      "index": 3,
+      "url": "https://arxiv.org/abs/2212.13894",
+      "title": "LAMBADA: Backward Chaining for Automated Reasoning in Natural Language (Kazemi et al., ACL 2023)",
+      "summary": "Backward chaining decomposes reasoning into four LLM-implemented sub-modules. Sizable accuracy boosts on deep reasoning benchmarks. Does not address document extraction—assumes facts pre-provided in natural language."
+    },
+    {
+      "index": 4,
+      "url": "https://arxiv.org/abs/2512.03360",
+      "title": "From Hypothesis to Premises: LLM-based Backward Logical Reasoning with Selective Symbolic Translation (Li et al., AAAI 2026, HBLR)",
+      "summary": "Confidence-aware partial translation: only high-confidence spans converted to FOL; uncertain content remains in NL. Translation reflection module reverses lossy conversions. Thresholding at parse time (upfront), not at resolution failure, incompletely demand-driven."
+    },
+    {
+      "index": 5,
+      "url": "https://arxiv.org/abs/2605.08011",
+      "title": "Abductive Reasoning with Probabilistic Commonsense (ARGOS, 2026)",
+      "summary": "Solver failures trigger LLM generation of commonsense rules (not document-grounded facts). SAT backbone guidance. Generates general world knowledge, not document-specific extraction."
+    },
+    {
+      "index": 6,
+      "url": "https://aclanthology.org/D19-1458.pdf",
+      "title": "CLUTRR: A Diagnostic Benchmark for Inductive Reasoning from Text (Sinha et al.)",
+      "summary": "Multi-hop family relations benchmark. 9 core family relations, explicit logical rules. Train: 2-4 hops; disjoint test entities: 2-10 hops. Ground truth marks explicit vs. inferred, enables per-relation precision/recall evaluation."
+    },
+    {
+      "index": 7,
+      "url": "https://github.com/allenai/ruletaker",
+      "title": "RuleTaker: Depth-Stratified Logical Reasoning Benchmark",
+      "summary": "Synthetic benchmark with facts + rules paired with {True, False, Unknown} queries. Depth 0-5; 100k theories per depth. Irrelevant fact injection tests selective extraction. Special subsets: NatLang, Birds-Electricity."
+    },
+    {
+      "index": 8,
+      "url": "https://arxiv.org/abs/2209.00840",
+      "title": "FOLIO: Natural Language Reasoning with First-Order Logic (Han et al., EMNLP 2024)",
+      "summary": "1,430 examples with 487 premise sets. All premises/conclusions have FOL annotations automatically verified by inference engine, ensuring logical correctness. Critical for validating LLM translations."
+    },
+    {
+      "index": 9,
+      "url": "https://arxiv.org/abs/2012.13048",
+      "title": "ProofWriter: Generating Implications, Proofs, and Abductive Statements over Natural Language (Tafjord et al., ACL 2021 Findings)",
+      "summary": "Generative model producing implications and natural language proofs. Explicit proof trees ground reasoning in NL rules/facts, enabling step-by-step auditability. Generalizes to unseen proof depths and out-of-domain problems."
+    },
+    {
+      "index": 10,
+      "url": "https://hotpotqa.github.io/",
+      "title": "HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering (Yang et al.)",
+      "summary": "112,779 Wikipedia-based Q&A pairs with sentence-level supporting facts. 75% bridge-entity (entity linking across passages); 25% comparison-type. Strong supervision enables span-level grounding quality measurement."
+    },
+    {
+      "index": 11,
+      "url": "https://fever.ai/dataset/fever.html",
+      "title": "FEVER: Fact Extraction and VERification (Thorne et al.)",
+      "summary": "185,445 Wikipedia claims labeled Supported, Refuted, NotEnoughInfo with evidence passages. NotEnoughInfo claims measure missing premises. Evidence annotation enables span-level grounding validation."
+    },
+    {
+      "index": 12,
+      "url": "https://www.cs.rochester.edu/~gildea/palmer-propbank-cl.pdf",
+      "title": "The Proposition Bank: An Annotated Corpus of Semantic Roles (Palmer et al.)",
+      "summary": "1M-word corpus of verb predicates with semantic role labels (A0-A5, AA). Predicate-specific but consistent roles. CoNLL 2008/2009 established dependency SRL evaluation standards. Foundation for predicate annotation schema."
+    },
+    {
+      "index": 13,
+      "url": "https://www.icsi.berkeley.edu/icsi/gazette/2007/09/feat-research-framenet",
+      "title": "FrameNet: Frame Semantic Annotation in Practice (Ruppenhofer et al.)",
+      "summary": "1,000+ hierarchical semantic frames, 13,000+ lexical units, 200,000+ annotations. Frame-centric semantic roles (core/non-core). Key difference: frame-semantic coherence vs. PropBank's predicate-centric roles."
+    },
+    {
+      "index": 14,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9823264/",
+      "title": "Information Extraction Pipelines for Knowledge Graphs (PMC review)",
+      "summary": "NER → RE → KG assembly pipeline. Standard metrics: entity-level and relation-level Precision/Recall/F1. Models include HGERE, PL-Marker. Slot filling for pre-defined relation extraction."
+    },
+    {
+      "index": 15,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12891465/",
+      "title": "Entity Disambiguation Using BERT and Cosine Similarity (recent review)",
+      "summary": "Entity linking disambiguates mentions to KB identities via BERT embedding cosine similarity or fuzzy matching. Validates predicate argument bindings via semantic similarity thresholds."
+    },
+    {
+      "index": 16,
+      "url": "https://arxiv.org/html/2510.06265v1",
+      "title": "A Comprehensive Survey of Hallucination in Large Language Models",
+      "summary": "Hallucination: fluent, syntactically correct output that is factually inaccurate or unsupported. Defines three-way classification (Explicit, Inferred, Hallucinated) and hallucination rate metric for RFDE context."
+    },
+    {
+      "index": 17,
+      "url": "https://link.springer.com/article/10.1007/s10462-025-11454-w",
+      "title": "Hallucination to Truth: A Review of Fact-Checking and Factuality (2025)",
+      "summary": "Confidence propagation mechanisms: ProbLog (posterior probability), self-consistency (multiple paths), LLM-reported confidence. Propagation rules: AND (product), OR (max), CRITICAL (min)."
+    },
+    {
+      "index": 18,
+      "url": "https://github.com/EdinburghNLP/awesome-hallucination-detection",
+      "title": "Awesome Hallucination Detection (Edinburgh NLP, GitHub collection)",
+      "summary": "Comprehensive collection of hallucination detection methods and benchmarks. FACTCHD benchmark for fact-conflicting hallucinations. Integrates factual knowledge for detection."
+    },
+    {
+      "index": 19,
+      "url": "https://arxiv.org/html/2501.19047v2",
+      "title": "Understanding Model Calibration: Expected Calibration Error (ECE) (ICLR 2025 blogpost)",
+      "summary": "ECE = Σ |accuracy_bin − confidence_bin| × P(confidence in bin). Well-calibrated: high confidence ↔ high accuracy. Binning protocol, expected value interpretation, calibration error measures."
+    },
+    {
+      "index": 20,
+      "url": "https://surge-ai.medium.com/inter-annotator-agreement-an-introduction-to-cohens-kappa-statistic-dcc15ffa5ac4",
+      "title": "Inter-Annotator Agreement: Cohen's Kappa Statistic (Surge AI)",
+      "summary": "Cohen's Kappa measures rater agreement accounting for chance. NLP annotation protocol: training, blind annotation, adjudication, iterative refinement. Predicate annotation schema (functor, arguments, source span, category, confidence)."
+    },
+    {
+      "index": 21,
+      "url": "https://arxiv.org/html/2405.07437v2",
+      "title": "Evaluation of Retrieval-Augmented Generation: A Survey",
+      "summary": "RAG pipeline evaluation framework. Metrics: atomic extraction (precision, recall, F1), end-to-end reasoning (accuracy), efficiency (latency, call count, tokens). Baseline comparison matrix."
+    },
+    {
+      "index": 22,
+      "url": "https://unstructured.io/insights/rag-evaluation-a-data-pipeline-performance-framework",
+      "title": "Evaluating RAG Systems: Metrics Guide",
+      "summary": "Comprehensive metrics for retrieval, generation, and end-to-end reasoning. Precision, recall, F1, hallucination rate as primary metrics. Confidence calibration and efficiency measurements."
+    },
+    {
+      "index": 23,
+      "url": "https://deepeval.com/guides/guides-rag-evaluation",
+      "title": "RAG Evaluation & Success Criteria Operationalization (DeepEval)",
+      "summary": "Success criteria operationalization: RFDE precision ≥ baseline + 10pp, hallucination ≤ baseline × 0.7, multi-hop accuracy ≥ baseline. Measurable thresholds for evaluation."
+    },
+    {
+      "index": 24,
+      "url": "https://www.giskard.ai/knowledge/rag-benchmarking-for-ai-evaluation",
+      "title": "RAG Benchmarking: Cost & Latency Measurement",
+      "summary": "Cost per query measurement: LLM calls, token consumption, wall-clock latency. Protocol: single GPU, batch size 1, 2-3 passes, averaging. Budget tracking for reproducibility."
+    },
+    {
+      "index": 25,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38742455/",
+      "title": "A Taxonomy for Advancing Systematic Error Analysis (2025)",
+      "summary": "Error taxonomy: extraction errors (missing fact, overgenerated predicate, wrong argument binding, incorrect confidence). Reasoning errors (incomplete proof, logical inconsistency, unjustified leap). Root cause analysis."
+    },
+    {
+      "index": 26,
+      "url": "https://proceedings.mlr.press/v235/li24bp.html",
+      "title": "OODRobustBench: Benchmarking Adversarial Robustness under Distribution Shift",
+      "summary": "Adversarial robustness protocol: compositional generalization (train domain → test other), depth generalization (shallow → deep), noise robustness (irrelevant facts), contradiction handling, entity robustness. Generalization gap metrics."
+    },
+    {
+      "index": 27,
+      "url": "https://arxiv.org/html/2310.12793v2",
+      "title": "On Adversarial Robustness of Out-of-Distribution Generalization",
+      "summary": "Adversarial consistency checking: multi-turn consistency (fact reordering), noise resilience (irrelevant fact injection), contradiction detection, robustness scoring (success under perturbations)."
+    },
+    {
+      "index": 28,
+      "url": "https://conceptnet.io/",
+      "title": "ConceptNet: Freely-Available Semantic Network (MIT Media Lab)",
+      "summary": "3.4M entity-relation tuples, 36 relation types. Gap analysis: characterize failures requiring document-grounded facts vs. commonsense knowledge. Success on implicit-reasoning benchmarks (CommonsenseQA, SocialIQA, PIQA)."
+    },
+    {
+      "index": 29,
+      "url": "https://github.com/yuce/pyswip",
+      "title": "PySwip: Python-Prolog Bridge (GitHub)",
+      "summary": "Python interface to SWI-Prolog. assert(Clause), retract(Clause), query(Goal) for runtime clause management. Meta-interpreter pattern: findall/3, call/1 for proof introspection and derivation tree reconstruction."
+    },
+    {
+      "index": 30,
+      "url": "https://www.swi-prolog.org/FAQ/Python.md",
+      "title": "SWI-Prolog Python Integration and Confidence Propagation Rules",
+      "summary": "Meta-interpreter support in SWI-Prolog. Confidence propagation: AND (product rule), OR (max rule), CRITICAL (min rule for bottleneck). Final answer confidence from root proof node."
+    },
+    {
+      "index": 31,
+      "url": "https://arxiv.org/html/2506.12637v1",
+      "title": "Evidence Grounding and Source Attribution in Reasoning Systems",
+      "summary": "Evidence grounding via source span threading through proof derivations. (Predicate, SourceSpan) annotation per proof node enables human-auditable reasoning traces with document support validation."
+    },
+    {
+      "index": 32,
+      "url": "https://github.com/EdinburghNLP/awesome-hallucination-detection",
+      "title": "Hallucination Detection Harness: Predicate Verification",
+      "summary": "For each proof predicate, verify (functor, arg1, arg2) in document text or via entity linking (BERT cosine > threshold). Mark: Explicit (verbatim), Implicit (inferred), Hallucinated (unsupported)."
+    }
+  ],
+  "follow_up_questions": [
+    "How does demand-driven extraction performance degrade when entities in document premises require coreference resolution or ellipsis handling, and what preprocessing is needed for robust entity linking in informal text?",
+    "What is the optimal confidence threshold for selective symbolic translation in HBLR-style systems, and does it vary by predicate type or document domain?",
+    "Beyond atomic extraction precision and hallucination rate, what additional measurements (proof tree depth, predicate reuse, false negatives) would distinguish true demand-driven improvement from baseline systems?"
+  ]
+}
